@@ -1,14 +1,21 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaHome, FaSeedling, FaBug, FaChartLine, FaCog } from 'react-icons/fa';
+import { FaHome, FaSeedling, FaBug, FaChartLine, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import { GiPlantRoots } from 'react-icons/gi';
 import './Navbar.css';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const location = useLocation();
+  const { logout } = useAuth();
 
   const isActive = (path) => {
     return location.pathname === path ? 'active' : '';
+  };
+
+  const handleLogout = () => {
+    logout();
+    // Navigation will be handled by ProtectedRoute
   };
 
   return (
@@ -35,6 +42,9 @@ const Navbar = () => {
         <Link to="/settings" className={`nav-link ${isActive('/settings')}`}>
           <FaCog /> Settings
         </Link>
+        <button onClick={handleLogout} className="nav-link">
+          <FaSignOutAlt /> Logout
+        </button>
       </div>
     </nav>
   );
