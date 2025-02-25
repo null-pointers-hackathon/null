@@ -1,0 +1,3 @@
+mkdir backend-hackathon
+cd backend-hackathon
+npm init -y 
